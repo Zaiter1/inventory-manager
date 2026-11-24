@@ -1,0 +1,24 @@
+{
+  "name": "inventory-manager",
+  "version": "1.0.0",
+  "description": "Sistema CRUD de inventario aplicando Git Flow - Programación III.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zaiter1/inventory-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Zaiter1/inventory-manager/issues"
+  },
+  "homepage": "https://github.com/Zaiter1/inventory-manager#readme",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
