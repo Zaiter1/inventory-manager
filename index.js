@@ -72,6 +72,26 @@ app.put('/productos/:id', (req, res) => {
     res.status(200).json(producto)
 })
 
+// DELETE - Eliminar un producto
+app.delete('/productos/:id', (req, res) => {
+    const id = Number(req.params.id)
+    const index = productos.findIndex(p => p.id === id)
+
+    if (index === -1) {
+        return res.status(404).json({
+            mensaje: 'Producto no encontrado'
+        })
+    }
+
+    productos.splice(index, 1)
+
+    fs.writeFileSync(dataPath, JSON.stringify(productos, null, 2))
+
+    res.status(200).json({
+        mensaje: 'Producto eliminado correctamente'
+    })
+})
+
 app.listen(PORT, () => {
     console.log(`Servidor ejecutándose en http://localhost:${PORT}`)
 })
