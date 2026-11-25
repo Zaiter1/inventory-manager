@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Inventory Manager</h1>
+        <p>Sistema de gestión de inventario</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2 id="tituloFormulario">Registrar producto</h2>
+
+            <form id="formProducto">
+                <div class="campos">
+                    <div>
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" required>
+                    </div>
+
+                    <div>
+                        <label for="precio">Precio (RD$)</label>
+                        <input type="number" id="precio" min="0.01" step="0.01" required>
+                    </div>
+
+                    <div>
+                        <label for="cantidad">Cantidad</label>
+                        <input type="number" id="cantidad" min="0" step="1" required>
+                    </div>
+                </div>
+
+                <button type="submit" id="btnGuardar">Agregar producto</button>
+                <button type="button" id="btnCancelar" hidden>Cancelar</button>
+            </form>
+
+            <p id="mensaje"></p>
+        </section>
+
+        <section class="card">
+            <h2>Productos registrados</h2>
+
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaProductos"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Miguel Zaiter - 2025-0928 | Programación III</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -7,8 +7,22 @@ const app = express()
 const PORT = 3000
 
 app.use(express.json())
+app.use(express.static(path.join(__dirname, 'public')))
 
 const dataPath = path.join(__dirname, 'productos.json')
+
+// Validacion de los datos de productos
+function validarProducto(nombre, precio, cantidad) {
+    return (
+        typeof nombre === 'string' &&
+        nombre.trim() !== '' &&
+        typeof precio === 'number' &&
+        Number.isFinite(precio) &&
+        precio > 0 &&
+        Number.isInteger(cantidad) &&
+        cantidad >= 0
+    )
+}
 
 const productos = JSON.parse(fs.readFileSync(dataPath, 'utf8'))
 
@@ -36,6 +50,11 @@ app.get('/productos/:id', (req, res) => {
 app.post('/productos', (req, res) => {
     const { nombre, precio, cantidad } = req.body
 
+    if (!validarProducto(nombre, precio, cantidad)) {
+    return res.status(400).json({
+        mensaje: 'Datos del producto invalidos'
+    })}
+
     const nuevoProducto = {
         id: Date.now(),
         nombre,
@@ -62,6 +81,11 @@ app.put('/productos/:id', (req, res) => {
     }
 
     const { nombre, precio, cantidad } = req.body
+
+    if (!validarProducto(nombre, precio, cantidad)) {
+    return res.status(400).json({
+        mensaje: 'Datos del producto invalidos'
+    }) }
 
     producto.nombre = nombre
     producto.precio = precio
