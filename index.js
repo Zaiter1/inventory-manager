@@ -32,7 +32,6 @@ app.get('/productos/:id', (req, res) => {
 })
 
 
-
 // POST - Registrar un producto
 app.post('/productos', (req, res) => {
     const { nombre, precio, cantidad } = req.body
@@ -49,6 +48,28 @@ app.post('/productos', (req, res) => {
     fs.writeFileSync(dataPath, JSON.stringify(productos, null, 2))
 
     res.status(201).json(nuevoProducto)
+})
+
+// PUT - Actualizar un producto
+app.put('/productos/:id', (req, res) => {
+    const id = Number(req.params.id)
+    const producto = productos.find(p => p.id === id)
+
+    if (!producto) {
+        return res.status(404).json({
+            mensaje: 'Producto no encontrado'
+        })
+    }
+
+    const { nombre, precio, cantidad } = req.body
+
+    producto.nombre = nombre
+    producto.precio = precio
+    producto.cantidad = cantidad
+
+    fs.writeFileSync(dataPath, JSON.stringify(productos, null, 2))
+
+    res.status(200).json(producto)
 })
 
 app.listen(PORT, () => {
