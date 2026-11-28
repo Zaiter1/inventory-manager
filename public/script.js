@@ -16,6 +16,16 @@ const contadorProductos = document.getElementById('contadorProductos')
 let idEditar = null
 let listaProductos = []
 
+// Calcular el valor total del inventario
+function calcularValorInventario() {
+    const total = listaProductos.reduce((acumulado, producto) =>
+        acumulado + producto.precio * producto.cantidad, 0
+    )
+
+    document.getElementById('valorInventario').textContent =
+        'Valor total del inventario: RD$ ' + total.toFixed(2)
+}
+
 // Mostrar mensajes
 function mostrarMensaje(texto, error = false) {
     mensaje.textContent = texto
@@ -50,6 +60,8 @@ async function cargarProductos() {
 
 // Mostrar y filtrar productos por nombre
 function mostrarProductos() {
+    calcularValorInventario()
+
     const busqueda = buscarProducto.value.trim().toLowerCase()
 
     const productos = listaProductos.filter(producto =>
