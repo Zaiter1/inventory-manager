@@ -11,6 +11,7 @@ const btnGuardar = document.getElementById('btnGuardar')
 const btnCancelar = document.getElementById('btnCancelar')
 const titulo = document.getElementById('tituloFormulario')
 const buscarProducto = document.getElementById('buscarProducto')
+const contadorProductos = document.getElementById('contadorProductos')
 
 let idEditar = null
 let listaProductos = []
@@ -47,6 +48,10 @@ async function solicitar(url, opciones = {}) {
 async function cargarProductos() {
     try {
         listaProductos = await solicitar('/productos')
+
+        contadorProductos.textContent =
+            'Total de productos: ' + listaProductos.length
+
         mostrarProductos()
     } catch (error) {
         mostrarMensaje(error.message, true)
