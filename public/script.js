@@ -11,9 +11,20 @@ const btnGuardar = document.getElementById('btnGuardar')
 const btnCancelar = document.getElementById('btnCancelar')
 const titulo = document.getElementById('tituloFormulario')
 const buscarProducto = document.getElementById('buscarProducto')
+const contadorProductos = document.getElementById('contadorProductos')
 
 let idEditar = null
 let listaProductos = []
+
+// Calcular el valor total del inventario
+function calcularValorInventario() {
+    const total = listaProductos.reduce((acumulado, producto) =>
+        acumulado + producto.precio * producto.cantidad, 0
+    )
+
+    document.getElementById('valorInventario').textContent =
+        'Valor total del inventario: RD$ ' + total.toFixed(2)
+}
 
 // Mostrar mensajes
 function mostrarMensaje(texto, error = false) {
@@ -37,6 +48,10 @@ async function solicitar(url, opciones = {}) {
 async function cargarProductos() {
     try {
         listaProductos = await solicitar('/productos')
+
+        contadorProductos.textContent =
+            'Total de productos: ' + listaProductos.length
+
         mostrarProductos()
     } catch (error) {
         mostrarMensaje(error.message, true)
@@ -45,6 +60,8 @@ async function cargarProductos() {
 
 // Mostrar y filtrar productos por nombre
 function mostrarProductos() {
+    calcularValorInventario()
+
     const busqueda = buscarProducto.value.trim().toLowerCase()
 
     const productos = listaProductos.filter(producto =>
