@@ -221,5 +221,12 @@ btnCancelar.addEventListener('click', limpiarFormulario)
 // Buscar productos mientras el usuario escribe
 buscarProducto.addEventListener('input', mostrarProductos)
 
+// Limpiar búsqueda y mostrar todos los productos
+document.getElementById('btnLimpiarBusqueda').addEventListener('click', () => {
+    buscarProducto.value = ''
+    mostrarProductos()
+    buscarProducto.focus()
+})
+
 // Cargar productos al iniciar
 cargarProductos()
