@@ -95,6 +95,14 @@ button:hover {
     overflow-x: auto;
 }
 
+/* Valor total del inventario */
+#valorInventario {
+    background-color: #f1f5f9;
+    padding: 12px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -131,3 +139,4 @@ footer {
 .busqueda {
     margin-bottom: 20px;
 }
+
