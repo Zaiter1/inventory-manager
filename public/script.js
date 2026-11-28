@@ -89,6 +89,12 @@ function mostrarProductos() {
         const celdaCantidad = document.createElement('td')
         celdaCantidad.textContent = producto.cantidad
 
+        // Indicador de stock bajo
+        if (producto.cantidad <= 5) {
+            celdaCantidad.textContent += ' - Stock bajo'
+            celdaCantidad.style.color = '#dc2626'
+            celdaCantidad.style.fontWeight = 'bold'
+        }
         const acciones = document.createElement('td')
 
         const btnEditar = document.createElement('button')
